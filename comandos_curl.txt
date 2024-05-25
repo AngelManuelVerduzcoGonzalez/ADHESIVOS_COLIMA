@@ -1,0 +1,21 @@
+REGISTRAR A UN CLIENTE 
+curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"2635\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
+
+INICIAR SESION COMO CLIENTE Luis
+curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/login
+
+MOSTRAR TODOS LOS PRODUCTOS COMO USUARIO
+curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/productos
+
+INICIAR SESION ADMINISTRADOR
+curl -d "{\"nombreUsuario\":\"Hanzeel\", \"contrasena\":\"1234\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/login
+
+COMANDO PARA PROBAR QUE NO DEJA REGISTRAR UN CLIENTE SI SE REPITE EL RFC
+curl -d "{\"nombreUsuario\":\"Chispas\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"2635\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
+
+COMANDO PARA PROBAR QUE NO DEJA REGISTRAR UN CLIENTE SI SE REPITE EL NOMBRE DE USUARIO
+curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"123165\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
+
+ACTUALIZAR CONFIGURACION DE LA BD
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanzeelSQL1234';
+FLUSH PRIVILEGES;

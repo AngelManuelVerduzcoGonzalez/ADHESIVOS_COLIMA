@@ -1,0 +1,72 @@
+CREATE DATABASE ADHESIVOS_COLIMA;
+USE ADHESIVOS_COLIMA;
+Create table usuarios(id int auto_increment primary key, nombreUsuario varchar(50) not null, contrasena varchar(255) not null, tipo varchar(13) not null);
+Create table productos(id int auto_increment primary key, nombre varchar(50), cantidad int not null, precio int not null);
+Create table clientes(id int auto_increment primary key, rfc varchar(13) not null, celular long not null, calle VARCHAR(35) not null, numero int not null, codigopostal int not null, idUser int not null, FOREIGN KEY (idUser) REFERENCES usuarios(id));
+Create table facturas(id int auto_increment primary key ,fecha date not null, total float not null, idcliente int not null, foreign key (idcliente) REFERENCES clientes(id));
+Create table productos_factura(idproducto int, idfactura int,cantidad int not null, precioVenta float not null, FOREIGN KEY(idproducto) REFERENCES productos(id), foreign key (idfactura) REFERENCES facturas(id), primary key (idproducto, idfactura));
+
+-- Trigger para restar al stock de un prouducto --
+DELIMITER //
+
+CREATE TRIGGER restarStock AFTER INSERT ON productos_factura
+FOR EACH ROW
+BEGIN
+    -- Actualiza la cantidad en productos restando la cantidad insertada en productos_factura
+    UPDATE productos 
+    SET cantidad = cantidad - NEW.cantidad 
+    WHERE id = NEW.idproducto;
+END //
+
+DELIMITER ;
+
+-- Trigger para agregar el precio de venta al campo precioVenta --
+DELIMITER //
+
+CREATE TRIGGER agregarPrecio
+BEFORE INSERT ON productos_factura
+FOR EACH ROW
+BEGIN
+    DECLARE p_precio DECIMAL(10,2);
+
+    -- Busca el precio del producto en la tabla productos
+    SELECT precio INTO p_precio
+    FROM productos
+    WHERE id = NEW.idproducto;
+
+    -- Verifica si el precio fue encontrado
+    IF p_precio IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Precio del producto no encontrado en la tabla productos';
+    ELSE
+        -- Asigna el precio encontrado al nuevo registro
+        SET NEW.precioVenta = p_precio;
+    END IF;
+END//
+
+DELIMITER ;
+
+-- Procedimiento almacenado para agregar clientes -- 
+DELIMITER $$
+USE adhesivos_colima$$
+CREATE DEFINER=root@localhost PROCEDURE agregar_cliente(IN name VARCHAR(50), IN password VARCHAR(255), IN new_rfc VARCHAR(13), IN cellphone LONG, IN street VARCHAR(35), IN num INT, IN cp INT)
+BEGIN
+	DECLARE idUsuario INT;
+    DECLARE resultRFC VARCHAR(13);
+    
+    SELECT rfc INTO resultRFC FROM clientes WHERE rfc = new_rfc;
+    
+    IF resultRFC IS NULL THEN
+		INSERT INTO usuarios (nombreUsuario, contrasena, tipo) VALUES (name, password, "cliente");
+
+		SELECT id INTO idUsuario FROM usuarios WHERE nombreUsuario = name AND contrasena = password;
+    
+		INSERT INTO clientes(rfc, celular, calle, numero, codigopostal, idUser) VALUES (new_rfc, cellphone, street, num, cp, idUsuario);
+	ELSE
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El RFC ya existe.';
+	END IF;
+END$$
+
+DELIMITER ;
+
+INSERT INTO productos (nombre, cantidad, precio) VALUES ("Pega piso", 100, 50), ("Pega azulejo", 100, 60), ("Pegamento", 100, 20);
