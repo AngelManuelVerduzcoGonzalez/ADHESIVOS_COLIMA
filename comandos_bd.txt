@@ -69,4 +69,24 @@ END$$
 
 DELIMITER ;
 
-INSERT INTO productos (nombre, cantidad, precio) VALUES ("Pega piso", 100, 50), ("Pega azulejo", 100, 60), ("Pegamento", 100, 20);
+INSERT INTO productos (nombre, precio, cantidad) VALUES
+('adhesivo-universal', 3, 100),
+('pegamento-para-madera', 4, 200),
+('silicona-liquida', 4, 150),
+('adhesivo-en-barra', 2, 300),
+('cinta-adhesiva-de-doble-cara', 3, 120),
+('cinta-adhesiva-transparente', 1, 250),
+('adhesivo-epoxico', 6, 80),
+('cola-blanca-para-manualidades', 2, 400),
+('cinta-adhesiva-para-embalaje', 3, 180),
+('pegamento-instantaneo-cianoacrilato', 2, 500),
+('pegamento-termofusible', 3, 150),
+('adhesivo-para-azulejos', 5, 90),
+('pegamento-para-papel', 2, 300),
+('pegamento-para-textil', 4, 120),
+('adhesivo-de-contacto', 5, 110),
+('adhesivo-para-plastico', 4, 200),
+('adhesivo-para-metal', 6, 100),
+('pegamento-en-spray', 5, 140),
+('adhesivo-para-vidrio', 7, 70),
+('adhesivo-para-pvc', 3, 220);

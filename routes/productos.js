@@ -3,7 +3,11 @@ let usuariosMiddleware = require("../middleware/usuarios")
 let router = require("express").Router()
 
 router.get("/", usuariosMiddleware.isLoggedIn, (req, res, next) => {
-    productosController.mostrarProductos(req, res)
+    productosController.listar(req, res)
+})
+
+router.get("/:nombre", (req, res) => {
+    productosController.buscar(req, res)
 })
 
 module.exports = router
