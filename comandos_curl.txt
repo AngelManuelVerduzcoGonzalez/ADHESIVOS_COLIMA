@@ -28,3 +28,6 @@ curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKE
 ACTUALIZAR CONFIGURACION DE LA BD
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanzeelSQL1234';
 FLUSH PRIVILEGES;
+
+ACTUALIZARA
+curl -d "{\"nombre\":\"CUM\", \"columna\":\"precio\", \"nuevo\":\"100\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X PUT http://localhost:3000/productos
