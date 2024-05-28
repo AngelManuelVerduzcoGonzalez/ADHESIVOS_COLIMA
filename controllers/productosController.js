@@ -23,5 +23,19 @@ module.exports = {
                     res.json(rows)
             }
         )
+    },
+    agregar: (req, res) => {
+        db.query(
+            'INSERT INTO productos (nombre, precio, cantidad) VALUES (?, ?, ?);',
+            [req.body.nombre, req.body.precio, req.body.cantidad],
+            (err, rows, fields) => {
+                if (err) {
+                    res.json(err)
+                }
+                else {
+                    res.json(rows)
+                }
+            }
+        )    
     }
 }

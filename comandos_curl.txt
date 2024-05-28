@@ -1,14 +1,20 @@
 REGISTRAR A UN CLIENTE 
 curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"2635\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
 
-INICIAR SESION COMO CLIENTE Luis
+INICIAR SESION COMO CLIENTE
 curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/login
 
-MOSTRAR TODOS LOS PRODUCTOS COMO USUARIO
+MOSTRAR TODOS LOS PRODUCTOS
 curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/productos
+
+BUSCAR PRODUCTOS
+curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/productos/CAMBIA POR LO QUE QUIERES BUSCAR ALV
 
 INICIAR SESION ADMINISTRADOR
 curl -d "{\"nombreUsuario\":\"Hanzeel\", \"contrasena\":\"1234\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/login
+
+AGREGAR PRODUCTOS
+curl -d "{\"nombre\":\"CUM\", \"precio\":\"0\", \"cantidad\": \"10000\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X POST http://localhost:3000/productos
 
 COMANDO PARA PROBAR QUE NO DEJA REGISTRAR UN CLIENTE SI SE REPITE EL RFC
 curl -d "{\"nombreUsuario\":\"Chispas\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"2635\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
