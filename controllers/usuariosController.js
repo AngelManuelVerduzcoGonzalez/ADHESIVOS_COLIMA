@@ -33,8 +33,10 @@ module.exports = {
                             //Contraseña correcta
                             const token = jwt.sign(
                                 {
+                                    //PAYLOAD
                                     nombreUsuario: result[0].nombreUsuario,
-                                    usarioId: result[0].id, //id es una columna de la BD
+                                    usuarioId: result[0].id, //id es una columna de la BD
+                                    tipo: result[0].tipo
                                 },
                                 process.env.SECRET_KEY,
                                 {expiresIn: '7d'}

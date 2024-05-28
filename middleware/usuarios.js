@@ -30,7 +30,7 @@ module.exports = {
             if (err) {
                 return res.status(401).send('Token no válido.');
             }
-            if (decoded.tipo !== 'administrador') { // Verifica si el usuario es administrador
+            if (decoded.tipo != 'administrador') { // Verifica si el usuario es administrador
                 return res.status(403).send('Acceso denegado: se requiere rol de administrador.');
             }
             req.user = decoded; // Adjunta datos decodificados del usuario a la solicitud
