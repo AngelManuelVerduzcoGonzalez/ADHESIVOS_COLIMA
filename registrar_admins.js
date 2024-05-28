@@ -2,10 +2,10 @@ const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 
 const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    host: "localhost",
+    user: "root",
+    password: "hanzeelSQL1234",
+    database: "adhesivos_colima",
 });
 
 db.connect((err) => {
@@ -36,7 +36,7 @@ const registerUser = async (nombreUsuario, contrasena) => {
 };
 
 // Ejemplo de uso del script
-const nombreUsuario = 'Hanzeel';
+const nombreUsuario = 'Angek';
 const contrasena = '1234';
 
 registerUser(nombreUsuario, contrasena);
