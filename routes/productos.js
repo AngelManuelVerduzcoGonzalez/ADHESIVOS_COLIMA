@@ -10,7 +10,7 @@ router.get("/:nombre", usuariosMiddleware.isLoggedIn, (req, res) => {
     productosController.buscar(req, res)
 })
 
-router.post("/", usuariosMiddleware.isLoggedIn, (req, res) => {
+router.post("/", usuariosMiddleware.isLoggedIn, usuariosMiddleware.isAdmin, (req, res) => {
     productosController.agregar(req, res)
 })
 

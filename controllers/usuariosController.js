@@ -34,7 +34,7 @@ module.exports = {
                             const token = jwt.sign(
                                 {
                                     nombreUsuario: result[0].nombreUsuario,
-                                    usarioId: result[0].id //id es una columna de la BD
+                                    usarioId: result[0].id, //id es una columna de la BD
                                 },
                                 process.env.SECRET_KEY,
                                 {expiresIn: '7d'}
@@ -42,7 +42,7 @@ module.exports = {
                             return res.status(200).send({
                                 message: 'Sesión iniciada',
                                 token: token,
-                                usuario: result[0]
+                                tipo: result[0].tipo
                             })
                         }
                         return res.status(400).send({
