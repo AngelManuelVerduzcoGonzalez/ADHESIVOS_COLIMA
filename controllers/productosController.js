@@ -37,5 +37,21 @@ module.exports = {
                 }
             }
         )    
+    },
+    actualizar: (req, res) => {
+        const { columna, nuevo, nombre } = req.body;
+        const query = `UPDATE productos SET ${columna} = ? WHERE nombre = ?`;
+        db.query(
+            query,
+            [nuevo, nombre],
+            (err, rows, fields) => {
+                if (err) {
+                    res.json(err)
+                }
+                else {
+                    res.json(rows)
+                }
+            }
+        )
     }
 }
