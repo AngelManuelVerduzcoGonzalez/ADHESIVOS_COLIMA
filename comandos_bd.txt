@@ -90,3 +90,10 @@ INSERT INTO productos (nombre, precio, cantidad) VALUES
 ('pegamento-en-spray', 5, 140),
 ('adhesivo-para-vidrio', 7, 70),
 ('adhesivo-para-pvc', 3, 220);
+
+CREATE VIEW vista_usuarios_clientes AS
+SELECT u.nombreUsuario, c.rfc, c.celular, c.calle, c.numero, c.codigopostal
+FROM usuarios u
+INNER JOIN clientes c
+ON u.id = c.idUser
+ORDER BY u.id;
