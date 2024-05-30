@@ -143,12 +143,33 @@ module.exports = {
                 return res.status(401).send('Token no válido.');
             }
             idUsuario = decoded.usuarioId
+            console.log(idUsuario)
             //console.log(idUsuario)
             req.user = decoded; // Adjunta datos decodificados del usuario a la solicitud
         });
 
         db.query(
-            'SELECT * FROM vista_facturas_productos;',
+            //mal select
+            `
+                SELECT 
+                        f.id AS factura_id,
+                        f.fecha,
+                        f.total,
+                        p.nombre AS producto_nombre,
+                        pf.cantidad,
+                        pf.precioVenta AS precio_por_producto
+                    FROM 
+                        facturas f
+                    JOIN 
+                        productos_factura pf ON f.id = pf.idfactura
+                    JOIN 
+                        productos p ON pf.idproducto = p.id 
+                    JOIN
+                        clientes c ON f.idCliente = c.id 
+                    WHERE 
+                        c.id = ?;
+            `,
+            [idUsuario],
             (err, rows, fields) => {
                 if (err)
                     res.json(err)

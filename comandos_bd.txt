@@ -118,17 +118,38 @@ END//
 
 DELIMITER ;
 
-CREATE VIEW vista_facturas_productos AS
-SELECT 
-    f.id AS factura_id,
-    f.fecha,
-    f.total,
-    p.nombre AS producto_nombre,
-    pf.cantidad,
-    pf.precioVenta AS precio_venta
-FROM 
-    facturas f
-JOIN 
-    productos_factura pf ON f.id = pf.idfactura
-JOIN 
-    productos p ON pf.idproducto = p.id;
+DELIMITER //
+
+DELIMITER //
+
+DELIMITER //
+
+DELIMITER //
+
+DELIMITER //
+
+DELIMITER //
+
+CREATE PROCEDURE facturasCliente(IN clienteId INT)
+BEGIN
+    SELECT
+        f.id AS factura_id,
+        f.fecha,
+        f.total,
+        p.nombre AS producto_nombre,
+        pf.cantidad,
+        pf.precioVenta AS precio_producto
+    FROM
+        facturas f
+    JOIN
+        productos_factura pf ON f.id = pf.idfactura
+    JOIN
+        productos p ON pf.idproducto = p.id
+    WHERE
+        f.idcliente = clienteId;
+END //
+
+DELIMITER ;
+
+
+
