@@ -118,6 +118,28 @@ END//
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE facturasPorCliente(IN idCliente INT)
+BEGIN
+    SELECT 
+        f.fecha, 
+        p.nombre AS producto, 
+        pf.cantidad, 
+        pf.precioVenta AS precio
+    FROM 
+        facturas f
+    JOIN 
+        productos_factura pf ON f.id = pf.idfactura
+    JOIN 
+        productos p ON pf.idproducto = p.id
+    WHERE 
+        f.idcliente = idCliente;
+END //
+
+DELIMITER ;
+
+
 
 
 

@@ -157,21 +157,7 @@ module.exports = {
                 else{
                     const idCliente = rows[0].id
                     db.query(
-                        `
-                        SELECT 
-                            f.fecha, 
-                            p.nombre AS producto, 
-                            pf.cantidad, 
-                            pf.precioVenta AS precio
-                        FROM 
-                            facturas f
-                        JOIN 
-                            productos_factura pf ON f.id = pf.idfactura
-                        JOIN 
-                            productos p ON pf.idproducto = p.id
-                        WHERE 
-                            f.idcliente = ?;
-                        `,
+                        `CALL facturasPorCliente(?)`,
                         [idCliente],
                         (err, rows, fields) => {
                             if(err)
