@@ -16,7 +16,7 @@ module.exports = {
                 return res.status(401).send('Token no válido.');
             }
             idUsuario = decoded.usuarioId
-            console.log(idUsuario)
+            //console.log(idUsuario)
             req.user = decoded; // Adjunta datos decodificados del usuario a la solicitud
         });
 
@@ -130,5 +130,31 @@ module.exports = {
                 );
             }
         });
+    },
+    listar: (req, res) => {
+        let idUsuario = ""
+
+        const token = req.headers.authorization;
+        if (!token) {
+            return res.status(403).send('Token no proporcionado.');
+        }
+        jwt.verify(token.split(' ')[1], process.env.SECRET_KEY, (err, decoded) => {
+            if (err) {
+                return res.status(401).send('Token no válido.');
+            }
+            idUsuario = decoded.usuarioId
+            //console.log(idUsuario)
+            req.user = decoded; // Adjunta datos decodificados del usuario a la solicitud
+        });
+
+        db.query(
+            'SELECT * FROM vista_facturas_productos;',
+            (err, rows, fields) => {
+                if (err)
+                    res.json(err)
+                else
+                    res.json(rows)
+            }   
+        )
     }
 };
