@@ -123,10 +123,12 @@ DELIMITER //
 CREATE PROCEDURE facturasPorCliente(IN idCliente INT)
 BEGIN
     SELECT 
+        f.id AS idfactura,
         f.fecha, 
         p.nombre AS producto, 
         pf.cantidad, 
-        pf.precioVenta AS precio
+        pf.precioVenta AS precio,
+        (pf.cantidad * pf.precioVenta) AS total
     FROM 
         facturas f
     JOIN 
@@ -138,6 +140,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
 
 
 
