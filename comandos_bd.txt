@@ -97,3 +97,23 @@ FROM usuarios u
 INNER JOIN clientes c
 ON u.id = c.idUser
 ORDER BY u.id;
+
+DELIMITER //
+
+CREATE TRIGGER verificar_cantidad_producto
+BEFORE INSERT ON productos_factura
+FOR EACH ROW
+BEGIN
+    DECLARE disponible INT;
+    
+    -- Obtener la cantidad disponible del producto
+    SELECT cantidad INTO disponible FROM productos WHERE id = NEW.idproducto;
+    
+    -- Verificar si hay suficiente cantidad disponible
+    IF disponible < NEW.cantidad THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'No hay suficiente cantidad del producto para realizar la venta';
+    END IF;
+END//
+
+DELIMITER ;

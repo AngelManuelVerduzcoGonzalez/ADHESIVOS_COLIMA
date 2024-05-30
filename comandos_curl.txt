@@ -28,6 +28,9 @@ curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKE
 ACTUALIZAR
 curl -d "{\"nombre\":\"CUM\", \"columna\":\"precio\", \"nuevo\":\"100\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X PUT http://localhost:3000/productos
 
+CREAR UN PEDIDO
+curl -d "{\"fecha\":\"2024-05-29\", \"productos\":[{\"nombre\": \"adhesivo-universal\", \"cantidad\": 5}, {\"nombre\": \"pegamento-para-madera\", \"cantidad\": 5}]}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X POST http://localhost:3000/productos/crear
+
 ACTUALIZAR CONFIGURACION DE LA BD
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanzeelSQL1234';
 FLUSH PRIVILEGES;
