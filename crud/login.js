@@ -12,14 +12,18 @@ btn.addEventListener("click", () => {
         headers: {
             "Content-Type":"application/json; charset=UTF-8"
         }
-    }).then(response => {
-        console.log(response)
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+    }).then(response => response.json())
+    .then(data => {
+        if (data.token) {
+            // Almacenar el token en localStorage
+            localStorage.removeItem("token");
+            localStorage.setItem('token', data.token);
+            location.href = "../pages/home.html"
+        } else {
+            console.log('Login failed: ' + data.message);
         }
-        if (response.status == 200) {
-            window.location.href = "../pages/home.html"
-        }
-        return response.json();
     })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 })

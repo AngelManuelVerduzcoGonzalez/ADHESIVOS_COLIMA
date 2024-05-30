@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página principal - Adhesivos Colima</title>
-    <link rel="stylesheet" href="../css/productos.css"> <!-- Enlaza tu archivo CSS personalizado -->
+    <title>Mi carrito - Adhesivos Colima</title>
+    <link rel="stylesheet" href="../css/carrito.css">
 </head>
 <body>
     <nav class="nav-bar">
         <img class="logo" src="../img/logo.jpg" alt="Logo de Adhesivos Colima">
-        <div class="search-container">
-            <input type="text" placeholder="Buscar productos..." class="search-input">
-            <button class="search-button">Buscar</button>
-        </div>
         <ul class="nav-list">
-            <li class="list-item"><a href="carrito.html">Carrito</a></li>
+            <li class="list-item"><a href="home.html">Productos</a></li>
             <li class="list-item"><a href="pedidos.html">Mis pedidos</a></li>
         </ul>
     </nav>
     <main>
-        <h1>Productos de Adhesivos Colima</h1>
+        <h1>Mi carrito</h1>
         <div id="productos" class="productos container">
         </div>
+        <button id="comprar" type="button">Comprar productos</button>
     </main>
     <footer class="footer container">
         <p>Creadores:<br>
@@ -30,6 +27,6 @@
             Villa Figueroa Hanzeel Abraham <br>
         </p>
     </footer>
-    <script src="../crud/productos.js"></script>
+    <script src="../crud/carrito.js"></script>
 </body>
 </html>
