@@ -37,6 +37,6 @@ const registerUser = async (nombreUsuario, contrasena) => {
 
 // Ejemplo de uso del script
 const nombreUsuario = 'Hanzeel';
-const contrasena = '1234';
+const contrasena = '1234567';
 
 registerUser(nombreUsuario, contrasena);

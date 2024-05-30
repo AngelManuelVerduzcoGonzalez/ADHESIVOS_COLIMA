@@ -19,3 +19,4 @@ router.put("/", usuariosMiddleware.isAdmin, (req, res, next) => {
 })
 
 module.exports = router
+

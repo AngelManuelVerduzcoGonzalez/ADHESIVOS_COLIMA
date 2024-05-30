@@ -25,9 +25,17 @@ curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\", \"contrasena_r
 MOSTRAR TODOS LOS CLIENTES
 curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/clientes
 
+ACTUALIZAR
+curl -d "{\"nombre\":\"CUM\", \"columna\":\"precio\", \"nuevo\":\"100\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X PUT http://localhost:3000/productos
+
+CREAR UN PEDIDO
+curl -d "{\"fecha\":\"2024-05-29\", \"productos\":[{\"nombre\": \"adhesivo-universal\", \"cantidad\": 5}, {\"nombre\": \"pegamento-para-madera\", \"cantidad\": 5}]}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X POST http://localhost:3000/pedidos
+
+curl -d "{\"fecha\":\"2024-05-29\", \"productos\":[{\"nombre\": \"adhesivo-en-barra\", \"cantidad\": 10}, {\"nombre\": \"adhesivo-para-metal\", \"cantidad\": 1}, {\"nombre\": \"adhesivo-para-pvc\", \"cantidad\": 2}]}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X POST http://localhost:3000/pedidos
+
+LISTAR PEDIDOS
+curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/pedidos
+
 ACTUALIZAR CONFIGURACION DE LA BD
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanzeelSQL1234';
 FLUSH PRIVILEGES;
-
-ACTUALIZARA
-curl -d "{\"nombre\":\"CUM\", \"columna\":\"precio\", \"nuevo\":\"100\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X PUT http://localhost:3000/productos
