@@ -1,5 +1,9 @@
 const div = document.getElementById("productos");
 
+if (!localStorage.getItem("token")) {
+    location.href = "../pages/index.html"
+}
+
 const listarProductos = () => {
     let data = JSON.parse(localStorage.getItem("cartItems"));
     console.log(data)

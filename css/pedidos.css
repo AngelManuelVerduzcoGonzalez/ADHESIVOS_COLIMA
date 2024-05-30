@@ -61,18 +61,50 @@ h1 {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 200px;
+    width: 300px;
+    margin: 20px auto;
 }
 
 .total {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .fecha {
     color: #888;
     margin-bottom: 20px;
 }
+
+.productos {
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.producto {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.producto:last-child {
+    border-bottom: none;
+}
+
+.product-name {
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+}
+
+.product-quantity, .product-price {
+    flex: 0.5;
+    text-align: right;
+    color: #555;
+}
+
 
 
 .footer {

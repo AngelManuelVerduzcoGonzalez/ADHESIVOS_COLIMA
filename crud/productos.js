@@ -1,3 +1,7 @@
+if (!localStorage.getItem("token")) {
+    location.href = "../pages/index.html"
+}
+
 const listarProductos = () => {
     
     let div = document.getElementById("productos");
