@@ -1,0 +1,22 @@
+/* success.css */
+
+/* Estilo general del cuerpo */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Fondo azul claro */
+}
+
+/* Estilo para el título */
+h1 {
+    text-align: center;
+    color: #2e8b57; /* Color verde para el texto */
+    font-size: 2.5em;
+    line-height: 1.5;
+    margin: 0 20px; /* Margen lateral para evitar que el texto toque los bordes */
+}

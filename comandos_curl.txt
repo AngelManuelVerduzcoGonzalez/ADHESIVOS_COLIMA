@@ -22,6 +22,12 @@ curl -d "{\"nombreUsuario\":\"Chispas\", \"contrasena\":\"gaysito\", \"contrasen
 COMANDO PARA PROBAR QUE NO DEJA REGISTRAR UN CLIENTE SI SE REPITE EL NOMBRE DE USUARIO
 curl -d "{\"nombreUsuario\":\"Luis\", \"contrasena\":\"gaysito\", \"contrasena_repetida\":\"gaysito\", \"rfc\":\"123165\", \"celular\": \"3132634\", \"calle\": \"bosho2\", \"numero\": \"34\", \"codigopostal\": \"28120\"}" -H "Content-Type: application/json" -X POST http://localhost:3000/sign-up
 
+MOSTRAR TODOS LOS CLIENTES
+curl -H "Content-Type: aplication/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" http://localhost:3000/clientes
+
+ACTUALIZAR
+curl -d "{\"nombre\":\"CUM\", \"columna\":\"precio\", \"nuevo\":\"100\"}" -H "Content-Type: application/json" -H "Authorization: Bearer CAMBIA TU TOKEN AQUI ALV" -X PUT http://localhost:3000/productos
+
 ACTUALIZAR CONFIGURACION DE LA BD
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanzeelSQL1234';
 FLUSH PRIVILEGES;
