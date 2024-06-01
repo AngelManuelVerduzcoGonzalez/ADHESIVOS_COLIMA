@@ -39,6 +39,7 @@ body {
 main {
     padding: 20px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -100,6 +101,7 @@ h1 {
     margin-top: 20px;
     width: 100%;
     bottom: 0;
+    box-sizing: border-box;
 }
 
 .footer p {

@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    overflow-x: hidden;
 }
 
 .nav-bar {
@@ -64,6 +65,7 @@ body {
 main {
     padding: 20px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -127,6 +129,7 @@ h1 {
     padding: 20px;
     margin-top: 20px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .footer p {

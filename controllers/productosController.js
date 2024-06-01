@@ -15,7 +15,7 @@ module.exports = {
     buscar: (req, res) => {
         db.query(
             'SELECT * FROM productos where nombre like ?;',
-            [`${req.params.nombre}%`],
+            [`%${req.params.nombre}%`],
             (err, rows, fields) => {
                 if (err)
                     res.json(err)

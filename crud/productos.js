@@ -78,4 +78,34 @@ const addToArrayInLocalStorage = (element, key) => {
     saveArrayToLocalStorage(array, key);
 }
 
+let btnBuscar = document.getElementById("btn-buscar");
+
+btnBuscar.addEventListener("click", () => {
+    let div = document.getElementById("productos");
+    let token = localStorage.getItem("token");
+    let search = document.getElementById("txt-buscar").value;
+    let parsedSearch = search.replaceAll(" ", "-");
+
+    fetch(`http://localhost:3000/productos/${parsedSearch}`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    .then((response) => response.json())
+    .then((results) => {
+        div.innerHTML = "";
+        for (let i = 0; i < results.length; i++) {
+            let newCard = `
+                <div class="product-card" data-id="${results[i].id}">
+                    <h4 class="product-name">${results[i].nombre.replaceAll("-", " ")}</h4>
+                    <p class="product-price">Precio: ${results[i].precio} USD</p>
+                    <input type="number" class="product-quantity" value="1" min="1">
+                    <button class="btn-cart" type="button">Agregar al carrito</button>
+                </div>                
+            `
+            div.innerHTML += newCard;
+        }    
+    })
+})
+
 listarProductos();

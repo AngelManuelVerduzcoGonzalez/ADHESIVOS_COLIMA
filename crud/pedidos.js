@@ -10,73 +10,79 @@ const recuperarProductos = () => {
     })
     .then((response) => response.json())
     .then((pedidos) => {
-        console.log(pedidos)
-        const pedidosAgrupados = agruparPorIdFactura(pedidos);
-        console.log(pedidosAgrupados);
-        // for (let i = 0; i < pedidos.length; i++) {
-        //     let pedido = separarPedidos(pedidos)
-        //     let newPedido = `
-        //         <div class="pedido-card">
-        //             <h4 class="total">Total: ${calcularTotal(pedido)} USD</h4>
-        //             <p class="fecha">Fecha: ${pedido[0].fecha}</p>
-        //             <div class="productos">
-        //                 <div class="producto">
-        //                     <p class="product-name">${pedido[i].nombre}</p>
-        //                     <p class="product-quantity">Cant: ${pedido[i].cantidad}</p>
-        //                     <p class="product-price"> ${pedido[i].precio} USD</p>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     `
-        //     div.innerHTML += newPedido;
-        // }
-    })
-}
+    
+        const pedidosAgrupados = agruparPorIdFactura(pedidos[0]);
+        console.log(pedidosAgrupados)
 
-const separarPedidos = (pedidos) => {
-    let arrayPedido = [];
-    while (pedidos.length > 1) {
-        let idFactura = pedidos[0].idFactura
-        for (let i = 0; i < pedidos.length; i++) {
-            if (pedidos[i].idFactura == idFactura) {
-                arrayPedido.push(pedidos[i]);
-                pedidos.splice(i, 1);
-            }
-        }        
+    for (let i = 0; i < pedidosAgrupados.length; i++) {
+        let productosHTML = '';
+        pedidosAgrupados[i].productos.forEach(producto => {
+            productosHTML += `
+                <div class="producto">
+                    <p class="product-name">${producto.producto}</p>
+                    <p class="product-quantity">Cant: ${producto.cantidad}</p>
+                    <p class="product-price">${producto.precio}USD</p>
+                    <p class="product-total">Total: ${producto.total} USD</p>
+                </div>
+            `;
+        });
+
+        let newPedido = `
+            <div class="pedido-card" id="pedido-${pedidosAgrupados[i].idfactura}">
+                <h4 class="total">Total: ${calcularTotal(pedidosAgrupados[i])} USD</h4>
+                <p class="fecha">Fecha: ${formatearFecha(pedidosAgrupados[i].fecha)}</p>
+                <div class="productos">
+                    ${productosHTML}
+                </div>
+            </div>
+        `;
+        div.innerHTML += newPedido;
     }
-    return arrayPedido;
+    })
 }
 
 function agruparPorIdFactura(pedidos) {
     const pedidosAgrupados = {};
 
     pedidos.forEach(pedido => {
-        const idFactura = pedido.idfactura;
-        console.log(idFactura)
-        if (!pedidosAgrupados[idFactura]) {
-            pedidosAgrupados[idFactura] = {
-                idfactura: idFactura,
-                fecha: pedido.fecha,
+        const { idfactura, fecha, producto, cantidad, precio, total } = pedido;
+        
+        if (!pedidosAgrupados[idfactura]) {
+            pedidosAgrupados[idfactura] = {
+                idfactura: idfactura,
+                fecha: new Date(fecha),
                 productos: []
             };
         }
-        pedidosAgrupados[idFactura].productos.push({
-            producto: pedido.producto,
-            cantidad: pedido.cantidad,
-            precio: pedido.precio,
-            total: pedido.total
+
+        pedidosAgrupados[idfactura].productos.push({
+            producto: producto,
+            cantidad: cantidad,
+            precio: precio,
+            total: total
         });
     });
 
-    return pedidosAgrupados;
+    return Object.values(pedidosAgrupados);
 }
 
 const calcularTotal = (pedido) => {
     let total = 0;
 
-    for (let i = 0; i < pedido.length; i++) {
-        total += pedido[i].total
+    for (let i = 0; i < pedido.productos.length; i++) {
+        console.log(pedido.productos[i].total )
+        total += parseFloat(pedido.productos[i].total)
     }
+
+    return total
+}
+
+function formatearFecha(fecha) {
+    return fecha.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 }
 
 recuperarProductos();
